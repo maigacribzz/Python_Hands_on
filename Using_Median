@@ -1,0 +1,91 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+import itertools
+
+#
+# Complete the 'interQuartile' function below.
+#
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY values
+#  2. INTEGER_ARRAY freqs
+#
+
+def interQuartile(values, freqs,n):
+    # Print your answer to 1 decimal place within this function
+    # d = {}
+    # L = []
+    # LL = sorted([])
+    
+    # for i,j in zip(values,freqs):
+    #      d.update({i:j})
+    
+    # for k,v in d.items():
+    #     L.append([k]*v)
+    
+    # #LL = list(itertools.chain(*L))  
+    # for i in L:
+    #     LL.extend(i)
+    
+    # #Code starts here
+    # middle = int(len(LL)/2)
+    # left = LL[:middle]
+    # right = LL[middle+1:]
+    
+    # middle_left = int(len(left)/2)
+    # Q1 = (left[middle_left-1] + left[middle_left])/2
+    
+    # middle_right = int(len(right)/2)
+    # Q3 = (right[middle_right-1] + right[middle_right])/2
+    
+    # interQuartile_range = round(Q3 - Q1,1)
+    # print(interQuartile_range)
+    
+    
+    import statistics as st
+    #n = int(input())
+    #X = [int(i) for i in input().split()]
+    #F = [int(i) for i in input().split()]
+
+    S= []
+    for i in range(n):
+        S.extend([values[i]]*freqs[i])
+
+    S = sorted(S)
+
+
+    n = len(S)
+    n2 = int(n/2)
+    print(round(float(st.median(S[-n2:])-st.median(S[:n2])),1))
+        
+        
+        OR
+        
+    from statistics import median
+    N,arr = int(input()),[]
+    data,freq = list(map(int,input().split())),list(map(int,input().split()))
+    for i in range(N):
+            arr += [data[i]] * freq[i]
+    arr.sort()
+    t = int(len(arr)/2)
+    if len(arr)%2==0:
+            q1=arr[:t]
+            q3=arr[t:]
+    else:
+            q1=arr[:t]
+            q3=arr[t+1:]
+    print(round(float(median(q3)-median(q1)), 1))
+        
+        
+if __name__ == '__main__':
+    n = int(input().strip())
+
+    val = list(map(int, input().rstrip().split()))
+
+    freq = list(map(int, input().rstrip().split()))
+
+    interQuartile(val, freq,n)
